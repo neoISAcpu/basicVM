@@ -28,7 +28,7 @@ EQNZ        op_eqnz         0   0    pop top and compare with zero. push the not
 EQ          op_eq           0   0    compare: pop two top values from stack, compare to "equal" and than push the bool result to stack
 NE          op_ne           0   0    compare: pop two top values from stack, compare to "not equal" and than push the bool result to stack
 LT          op_lt           0   0    compare: pop two top values from stack, compare to "lower" and than push the bool result to stack
-GT          op_gt           0   0    compare: pop two top values from stack, compare to "greater" and than push the bool result to stack
+GT        op_gt           0   0    compare: pop two top values from stack, compare to "greater" and than push the bool result to stack
 LE          op_le           0   0    compare: pop two top values from stack, compare to "lower equal" and than push the bool result to stack
 GE      	  op_ge           0   0    compare: pop two top values from stack, compare to "greater equal" and than push the bool result to stack
 JMP         op_jmp          0   0    pop top as address and unconditional jump to the address 
