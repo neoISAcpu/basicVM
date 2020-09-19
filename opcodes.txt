@@ -1,0 +1,72 @@
+# command, function in c, number parameters, size of parameter(byte)
+IOP         op_iop          0   0    illegal operation
+NOP         op_nop          0   0    no operation
+ADD         op_add          0   0    alu: pop two top values from stack, than push the result to stack
+SUB         op_sub          0   0    "
+MUL         op_mul          0   0    "
+DIV         op_divide       0   0    "
+REM         op_rem          0   0    "
+AND         op_and          0   0    "
+OR          op_or           0   0    "
+XOR         op_xor          0   0    "
+SHL         op_shl          0   0    "
+SHR         op_shr          0   0    "
+LOAD        op_load         0   0    pop top as load type and pop second as address, than push the value from the address to the stack 
+LOAD.2D     op_load_2d      0   0    pop top as load type and pop second and third as addresses, add the two addresses and than push the value from the address to the stack
+STORE       op_store        0   0    pop top as store type, pop the second as address and pop the third as value. than push the value to the address
+STORE.2D    op_store_2d     0   0    pop top as store type, pop second and third as addresses and pop the fourth as value. than push the value to the address
+FETCH.1     op_fetch        1   1    parameter n fetches the n'th stack element and push it to stack. n=1 is tos. n=0 =: nop
+FETCH.2     op_fetch        2   1    parameters n,m  fetches the n'th and the m'th stack elements and push them to stack.
+FETCH.4     op_fetch        4   1    "
+FETCH.8     op_fetch        8   1    "
+MIX.2       op_mix          2   1    parameters n,m  fetches the n'th and the m'th stack elements. pop the top 2 elements and than push them to stack. 'mix.2 2,1' = swap
+MIX.4       op_mix          4   1    "
+MIX.8       op_mix          8   1    "
+DROP        op_drop         0   0    pop the top
+EQZ         op_eqz          0   0    pop top and compare with zero. push the equal bool to stack
+EQNZ        op_eqnz         0   0    pop top and compare with zero. push the notequal bool to stack
+EQ          op_eq           0   0    compare: pop two top values from stack, compare to "equal" and than push the bool result to stack
+NE          op_ne           0   0    compare: pop two top values from stack, compare to "not equal" and than push the bool result to stack
+LT          op_lt           0   0    compare: pop two top values from stack, compare to "lower" and than push the bool result to stack
+GT          op_gt           0   0    compare: pop two top values from stack, compare to "greater" and than push the bool result to stack
+LE          op_le           0   0    compare: pop two top values from stack, compare to "lower equal" and than push the bool result to stack
+GE      	op_ge           0   0    compare: pop two top values from stack, compare to "greater equal" and than push the bool result to stack
+JMP         op_jmp          0   0    pop top as address and unconditional jump to the address 
+JMP.CON     op_jmp_con      0   0    pop top as address, second as bool and conditional jump to the address 
+CALL        op_call         0   0    pop top as address and unconditional call to the address
+CALL.CON    op_call_con     0   0    pop top as address, second as bool and conditional call to the address
+RET         op_ret          0   0    return control from call
+
+# system stuff----------
+BP          op_bp           0   0    breakpoint. prints some info, stack and waits pressing enter to continue.
+PRINT       op_print        0   0    print the top value from stack on screen
+PRINT.STACK op_print_stack  0   0    print the stack on screen
+QUIT        op_quit         0   0    quit the vm
+
+# todo
+# CONVERT     op_convert      0   0    pop top as type, pop the second and convert them to the type. push the value to stack  
+
+# blk.x     op_blk         0   0     auto insert from 96-127
+#                                    command block. combines several (2-32) independent commands into one.
+#                                    detailed description on https://neoisa.org
+
+# CONST     op_const     x   y       auto insert from 128-255
+#                       type: b=bool, i=signed integer, u=unsigned integer, f=float, a=address, i-u-f-a bits:8,16,32,64, count: match 2^n bytes max 512 bit
+#                       examples: 
+#                                 0x82 const.i32    - scaler: singed int 32 bit
+#                                 0xca const.f32.16 - vector: 16*32bit float 
+#                                 0xf0 const.bool   - bool
+#                                 0xf3 const.bool.8 - vector: 8 bools 
+#
+#                       const 1xxxyyyy  - typ: yyyy / 0x0=i8,0x1=i16,0x2=i32,0x3=i64
+#                                                     0x4=u8,0x5=u16,0x6=u32,0x7=u64
+#                                                     0x8=f8,0x9=f16,0xa=f32,0xb=f64  
+#                                                     0xc=a8,0xd=a16,0xe=a32,0xf=a64
+#                                       length: xxx / 0x0=1,0x1=i2,0x2=4,0x3=8
+#                                                     0x4=16,0x5=32,0x6=64,0x7=bool
+#                                       bool:         0xf0=1,0xf1=2,0xf2=4,0xf3=8,0xf4=16
+#                                                     0xf5=32,0xf6=64,0xf7=128,0xf8=256,0xf9=512
+#                                       extra:        0xfa-0xfe
+#                                       void:         0x7f
+#
+# all others    op_iop          
