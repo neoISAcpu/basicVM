@@ -2,7 +2,7 @@
 
 main:
     const.i8    0       # 0
-    const.i8    20       # 0 5
+    const.i8    5       # 0 5
 label:
     const.a32   rnd     
     const.i8    6
