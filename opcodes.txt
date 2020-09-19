@@ -13,13 +13,13 @@ SHL         op_shl          0   0    "
 SHR         op_shr          0   0    "
 LOAD        op_load         0   0    pop top as load type and pop second as address, than push the value from the address to the stack 
 LOAD.2D     op_load_2d      0   0    pop top as load type and pop second and third as addresses, add the two addresses and than push the value from the address to the stack
-STORE       op_store        0   0    pop top as store type, pop the second as address and pop the third as value. than push the value to the address
-STORE.2D    op_store_2d     0   0    pop top as store type, pop second and third as addresses and pop the fourth as value. than push the value to the address
-FETCH.1     op_fetch        1   1    parameter n fetches the n'th stack element and push it to stack. n=1 is tos. n=0 =: nop
-FETCH.2     op_fetch        2   1    parameters n,m  fetches the n'th and the m'th stack elements and push them to stack.
+STORE       op_store        0   0    pop top as address and pop the second as value. than write the value to the address. type is given by stack
+STORE.2D    op_store_2d     0   0    pop top and second as addresses and pop the third as value. than write the value to the address. type is given by stack
+FETCH.1     op_fetch        1   1    parameter n fetches the n'th stack element from top and push it to stack. n=1 is tos. n=0 =: nop
+FETCH.2     op_fetch        2   1    parameters n,m  fetches the n'th and the m'th stack elements from top and push them to stack.
 FETCH.4     op_fetch        4   1    "
 FETCH.8     op_fetch        8   1    "
-MIX.2       op_mix          2   1    parameters n,m  fetches the n'th and the m'th stack elements. pop the top 2 elements and than push them to stack. 'mix.2 2,1' = swap
+MIX.2       op_mix          2   1    parameters n,m  fetches the n'th and the m'th stack elements from top. pop the top 2 elements and than push them to stack. 'mix.2 2,1' = swap
 MIX.4       op_mix          4   1    "
 MIX.8       op_mix          8   1    "
 DROP        op_drop         0   0    pop the top
@@ -30,7 +30,7 @@ NE          op_ne           0   0    compare: pop two top values from stack, com
 LT          op_lt           0   0    compare: pop two top values from stack, compare to "lower" and than push the bool result to stack
 GT          op_gt           0   0    compare: pop two top values from stack, compare to "greater" and than push the bool result to stack
 LE          op_le           0   0    compare: pop two top values from stack, compare to "lower equal" and than push the bool result to stack
-GE      	op_ge           0   0    compare: pop two top values from stack, compare to "greater equal" and than push the bool result to stack
+GE      	  op_ge           0   0    compare: pop two top values from stack, compare to "greater equal" and than push the bool result to stack
 JMP         op_jmp          0   0    pop top as address and unconditional jump to the address 
 JMP.CON     op_jmp_con      0   0    pop top as address, second as bool and conditional jump to the address 
 CALL        op_call         0   0    pop top as address and unconditional call to the address
@@ -46,11 +46,11 @@ QUIT        op_quit         0   0    quit the vm
 # todo
 # CONVERT     op_convert      0   0    pop top as type, pop the second and convert them to the type. push the value to stack  
 
-# blk.x     op_blk         0   0     auto insert from 96-127
-#                                    command block. combines several (2-32) independent commands into one.
-#                                    detailed description on https://neoisa.org
+# blk.x     op_blk            0   0     auto insert from 96-127
+#                                       command block. combines several (2-32) independent commands into one.
+#                                       detailed description on https://neoisa.org
 
-# CONST     op_const     x   y       auto insert from 128-255
+# CONST     op_const        x   y       auto insert from 128-255
 #                       type: b=bool, i=signed integer, u=unsigned integer, f=float, a=address, i-u-f-a bits:8,16,32,64, count: match 2^n bytes max 512 bit
 #                       examples: 
 #                                 0x82 const.i32    - scaler: singed int 32 bit
