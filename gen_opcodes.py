@@ -1,7 +1,7 @@
 # Reads opcodes from opcodes.txt
 import os
 import sys
-from types import types
+from gen_types import types
 
 opcodes_1 = []
 opcodes_2 = []

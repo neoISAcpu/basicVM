@@ -1,6 +1,6 @@
 # Generates opcodes.h, defines.h and types.h in current directory
-from opcodes import opcodes_1, opcodes_2
-from types import types
+from gen_opcodes import opcodes_1, opcodes_2
+from gen_types import types
 
 
 with open('opcodes.h', 'w') as opcodes_header:
