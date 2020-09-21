@@ -2,8 +2,8 @@
 
 import sys
 
-from types   import typesKey
-from opcodes import instructions
+from gen_types   import typesKey
+from gen_opcodes import instructions
 
 equs = {}         # EQUs
 labels = {}       # LABELs
